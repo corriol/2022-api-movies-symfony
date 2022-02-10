@@ -1,0 +1,15 @@
+App\Entity\Movie:
+    attributes:
+        id:
+            groups: ['movie']
+        title:
+            groups: ['movie']
+        poster:
+            groups: ['movie']
+        overview:
+            groups: ['movie']
+        rating:
+            groups: ['movie']
+        releaseDate:
+            groups: ['movie']
+

@@ -3,29 +3,20 @@
 namespace App\Controller;
 
 use App\Repository\MovieRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use FOS\RestBundle\Controller\AbstractFOSRestController;
+use FOS\RestBundle\Controller\Annotations as Rest;
+use FOS\RestBundle\View\View;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class ApiMovieController extends AbstractController
+class ApiMovieController extends AbstractFOSRestController
 {
     /**
-     * @Route("/api/v1/movies", name="api_movies")
+     * @Rest\Get(path="/api/v1/movies", name="api_movies")
+     * @Rest\View(serializerGroups={"movie"}, serializerEnableMaxDepthChecks=true)
      */
-    public function index(MovieRepository $movieRepository): Response
-    {
-        $movies = $movieRepository->findAll();
-        $moviesAr = [];
-        foreach($movies as $movie) {
-            $movieAr["id"] = $movie->getId();
-            $movieAr["title"] = $movie->getTitle();
-            $movieAr["overview"] = $movie->getOverview();
-            $moviesAr[] = $movieAr;
-        }
-
-        return $this->json([
-            'message' => 'Welcome to your new controller!',
-            'data' => $moviesAr
-        ]);
+    public function index(MovieRepository $movieRepository) {
+        return $movieRepository->findAll();
     }
+
 }
