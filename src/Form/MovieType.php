@@ -31,11 +31,14 @@ class MovieType extends AbstractType
         ]);
     }
 
+    // eliminen el prefix per defecte que s'afig als controls dels formularis
+    // perquè no generem formularis, així podem usar handleRequest
     public function getBlockPrefix(): string
     {
         return '';
     }
 
+    // eliminem el nom del formulari perquè no s'utilize a l'hora d'obtenir les claus de les dades enviades.
     public function getName(): string
     {
         return '';

@@ -50,7 +50,7 @@ class ApiMovieController extends AbstractFOSRestController
         // $data = json_decode($request->getContent(), true);
         // $form->submit($data);
         // podem usar el mètode handleRequest com ho fem normalment pels canvis
-        // introduïts en MovieFormType
+        // introduïts en MovieFormType que permeten que pugam fer ús del Body Listener.
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
