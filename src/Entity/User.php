@@ -11,6 +11,8 @@ use Doctrine\ORM\Mapping\Table;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Serializer\Annotation\MaxDepth;
 use Symfony\Component\Translation\Util\ArrayConverter;
 
 /**
@@ -51,12 +53,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @ORM\OneToMany(targetEntity=Movie::class, mappedBy="user")
+     * @MaxDepth(1)
+     * @Groups({"user"})
      */
+
     private $movies;
 
     /**
-     * @ORM\OneToMany(targetEntity=Rating::class, mappedBy="user", fetch="EAGER")
-     */    
+     * @ORM\OneToMany(targetEntity=Rating::class, mappedBy="user")
+     * @Groups({"user"})
+     */
     private $ratings;
 
 

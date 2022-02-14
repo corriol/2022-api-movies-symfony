@@ -12,4 +12,9 @@ App\Entity\Movie:
             groups: ['movie']
         releaseDate:
             groups: ['movie']
+        user:
+            groups: ['movie' ]
+
+
+
 

@@ -1,0 +1,10 @@
+App\Entity\User:
+    attributes:
+        username:
+            groups: ['user', 'movie']
+        ratings:
+            groups: ['user']
+        movies:
+            groups: ['user']
+            
+

@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\MovieRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\Serializer\Annotation\MaxDepth;
 use Symfony\Component\Validator\Constraints as Assert;
 
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
@@ -38,25 +39,7 @@ class Movie
     /**
      * @return File
      */
-    public function getPosterFile(): ?File
-    {
-        return $this->posterFile;
-    }
 
-        // ...
-
-    public function setPosterFile(File $image = null)
-    {
-        $this->posterFile = $image;
-
-        // VERY IMPORTANT:
-        // It is required that at least one field changes if you are using Doctrine,
-        // otherwise the event listeners won't be called and the file is lost
-        if ($image) {
-            // if 'updatedAt' is not defined in your entity, use another property
-            $this->updatedAt = new \DateTimeImmutable('now');
-        }
-    }
     /**
      * @ORM\Column(type="text")
      * @Assert\Length(min=10, max = 1000)
@@ -88,6 +71,7 @@ class Movie
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="movies")
      * @ORM\JoinColumn(nullable=false)
+     * @MaxDepth(2)
      */
     private $user;
 
@@ -113,17 +97,6 @@ class Movie
         return $this;
     }
 
-    public function getTagline(): ?string
-    {
-        return $this->tagline;
-    }
-
-    public function setTagline(?string $tagline): self
-    {
-        $this->tagline = $tagline;
-
-        return $this;
-    }
 
     public function getPoster(): ?string
     {
